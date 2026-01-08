@@ -51,6 +51,15 @@ public class Conflict {
 
     // Constructors, Getters i Setters...
 
+    public Conflict() {
+    }
+
+    public Conflict(String name, String description, String status) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

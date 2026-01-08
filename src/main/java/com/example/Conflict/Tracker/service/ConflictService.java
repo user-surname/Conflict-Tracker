@@ -24,22 +24,22 @@ public class ConflictService {
     @Transactional
     public ConflictDTO addConflic(ConflictDTO conflictDTO) {
 
-        Conflict newConflict = new Conflict();
-        newConflict = conflictMapper.toEntity(conflictDTO);
-
-        conflictDTO = conflictMapper.toDTO(conflictRepository.save(newConflict));
-
-        return conflictDTO;
+        Conflict conflict = conflictRepository.save(conflictMapper.toEntity(conflictDTO));
+        return conflictMapper.toDTO(conflict);
     }
 
     @Transactional
     public ConflictDTO getConflict(Long id) {
 
+        Conflict conflict = conflictRepository.findById(id).orElseThrow(() -> new RuntimeException("Conflict with id " + id + " not found"));
+        return conflictMapper.toDTO(conflict);
+
        // Conflict conflict = conflictRepository.findById(id).orElseThrow(() -> new RuntimeException());
+       /*
         Optional<Conflict> optionalConflict = conflictRepository.findById(id);
         if(optionalConflict.isPresent()) return conflictMapper.toDTO(optionalConflict.get());
         else return null;
-
+        */
 
     }
 
@@ -48,7 +48,7 @@ public class ConflictService {
 
         List<Conflict> conflicts = new ArrayList<>();
         conflictRepository.findAll().forEach(conflicts::add);
-        return conflictMapper.toDTO(conflicts);
+        return conflictMapper.toDTOList(conflicts);
     }
 
     @Transactional
@@ -60,6 +60,11 @@ public class ConflictService {
         return conflictMapper.toDTO(conflict);
     }
 
-
+    public void deleteConflict(Long id) {
+        Conflict conflict = conflictRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Conflict not found with id " + id)
+        );
+        conflictRepository.deleteById(id);
+    }
 
 }
