@@ -25,10 +25,6 @@ public class Conflict {
     // --- Aquí la relació inversa ---
     // Moltes incidències pertanyen a un client.
 
-    @ManyToOne(fetch = FetchType.LAZY) // LAZY és gairebé sempre millor
-    @JoinColumn(name = "customer_id") // Aquesta serà la COLUMNA de la clau forana
-    private Customer customer;
-
     @ManyToMany
     @JoinTable(
             name = "conflict_country",
@@ -54,14 +50,6 @@ public class Conflict {
     private List<Event> events;
 
     // Constructors, Getters i Setters...
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    protected void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public void setName(String name) {
         this.name = name;

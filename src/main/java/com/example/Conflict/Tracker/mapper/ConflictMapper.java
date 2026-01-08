@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ConflictMapper {
     ConflictDTO toDTO(Conflict conflict);
-    List<ConflictDTO> toDTO(List<Conflict> conflicts);
+    List<ConflictDTO> toDTOList(List<Conflict> conflicts);
     Conflict toEntity(ConflictDTO conflictDTO);
 }
