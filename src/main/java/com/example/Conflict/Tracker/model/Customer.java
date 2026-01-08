@@ -40,16 +40,16 @@ public class Customer {
             orphanRemoval = true, // Si trec una incidència de la llista, s'esborra
             fetch = FetchType.LAZY // No carreguis les incidències fins que no les demani
     )
-    private List<Conflict> incidencies;
+    private List<Conflict> conflicts;
 
     // És important tenir mètodes per mantenir la consistència
-    public void addIncidencia(Conflict incidencia) {
-        incidencies.add(incidencia);
+    public void addConflict(Conflict incidencia) {
+        conflicts.add(incidencia);
         incidencia.setCustomer(this);
     }
 
     public void removeIncidencia(Conflict incidencia) {
-        incidencies.remove(incidencia);
+        conflicts.remove(incidencia);
         incidencia.setCustomer(null);
     }
 
@@ -69,8 +69,8 @@ public class Customer {
         return email;
     }
 
-    public List<Conflict> getIncidencies() {
-        return incidencies;
+    public List<Conflict> getConflicts() {
+        return conflicts;
     }
 
     public void setFirstName(String firstName) {

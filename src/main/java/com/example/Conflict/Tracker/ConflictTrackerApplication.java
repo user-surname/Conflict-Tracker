@@ -18,7 +18,7 @@ public class ConflictTrackerApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(CustomerRepository repository, ConflictService incidentService) {
+    public CommandLineRunner demo(CustomerRepository repository, ConflictService conflictService) {
         return (args) -> {
             // save a few customers
             repository.save(new Customer("Jack", "Bauer", "jb@email.com"));
@@ -27,7 +27,7 @@ public class ConflictTrackerApplication {
             repository.save(new Customer("David", "Palmer", "dp@email.com"));
             repository.save(new Customer("Michelle", "Dessler", "md@email.com"));
 
-            incidentService.crearIncidenciaPerCustomer(1L);
+            conflictService.createConflcit(1L);
 
             // fetch all customers
             log.info("Customers found with findAll():");

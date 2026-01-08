@@ -11,12 +11,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class ConflictService {
-
     @Autowired
     private CustomerRepository customerRepository;
 
@@ -30,7 +26,7 @@ public class ConflictService {
      * o es fa "rollback" si hi ha algun error.
      */
     @Transactional
-    public Conflict crearIncidenciaPerCustomer(Long customerId) {
+    public Conflict createConflcit(Long customerId) {
 
         // --- PAS 1: Recuperar el "pare" (l'amo de la relació "One") ---
         // Fem servir findById. Si no el troba, llançarà una excepció.
@@ -39,37 +35,25 @@ public class ConflictService {
 
         // --- PAS 2: Crear el "fill" (la nova incidència) ---
         // (Aquí podríem fer servir un Mapper, però ho fem manual per claredat)
-        Conflict novaIncidencia = new Conflict();
-        novaIncidencia.setTitol("Incidència de prova");
-        novaIncidencia.setDescripcio("Incidència de prova");
-        novaIncidencia.setEstat(ConflictStatus.ACTIVE);
+        Conflict newConflict = new Conflict();
+        newConflict.setName("Incidència de prova");
+        newConflict.setDescription("Incidència de prova");
+        newConflict.setStatus("OBERT");
 
         // --- PAS 3: ASSOCIAR (Aquest és el pas MÉS important) ---
         // Cridem el mètode 'helper' que vam crear a l'entitat Customer.
         // Això fa DUES coses:
         // 1. Afegeix la incidència a la llista (costat Java)
         // 2. Assigna el 'customer' a la incidència (costat JPA)
-        customer.addIncidencia(novaIncidencia);
+        customer.addConflict(newConflict);
 
         // --- PAS 4: DESAR ---
         // Com que tenim CascadeType.ALL al Customer,
         // només hem de desar el 'customer'.
-        // JPA (Hibernate) veurà que la llista 'incidencies' té un
-        // nou objecte i farà l'INSERT a la taula 'incidencies' automàticament.
+        // JPA (Hibernate) veurà que la llista 'conflicts' té un
+        // nou objecte i farà l'INSERT a la taula 'conflicts' automàticament.
         customerRepository.save(customer);
 
-        return novaIncidencia;
-    }
-
-    public List<ConflictDTO> getAll() {
-        List<Conflict> Conflicts = new ArrayList<>();
-        conflictRepository.findAll().forEach(Conflicts::add);
-        return ConflictMapper.toDTO(Conflicts);
-        //return customers.stream().map(this::convertToCustomerDTO).toList();
-        //return (List<Customer>)customerRepository.findAll();
-    }
-
-    public List<ConflictDTO> getByStatus(ConflictStatus status) {
-
+        return newConflict;
     }
 }

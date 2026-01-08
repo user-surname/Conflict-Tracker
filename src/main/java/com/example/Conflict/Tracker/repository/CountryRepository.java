@@ -1,12 +1,11 @@
 package com.example.Conflict.Tracker.repository;
 
-import com.example.Conflict.Tracker.model.Conflict;
+import com.example.Conflict.Tracker.model.Country;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ConflictRepository extends CrudRepository<Conflict, Long> {
-    Conflict findById(long id);
+public interface CountryRepository extends CrudRepository<Country, Long> {
+    Country findById(long id);
 
 }
-

@@ -3,23 +3,24 @@ package com.example.Conflict.Tracker.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "conflict")
+@Table(name = "conflicts")
 public class Conflict {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String titol;
+    private String name;
 
     @Lob // Per a textos llargs (es traduirà a CLOB o TEXT)
-    private String descripcio;
+    private String description;
 
-    private LocalDateTime dataObertura = LocalDateTime.now();
+    private LocalDateTime startDate = LocalDateTime.now();
 
-    private ConflictStatus estat; // Ex: "OBERTA", "TANCADA", "EN_PROCÉS"
+    private String status; // Ex: "OBERTA", "TANCADA", "EN_PROCÉS"
 
     // --- Aquí la relació inversa ---
     // Moltes incidències pertanyen a un client.
@@ -27,6 +28,30 @@ public class Conflict {
     @ManyToOne(fetch = FetchType.LAZY) // LAZY és gairebé sempre millor
     @JoinColumn(name = "customer_id") // Aquesta serà la COLUMNA de la clau forana
     private Customer customer;
+
+    @ManyToMany
+    @JoinTable(
+            name = "conflict_country",
+            joinColumns = @JoinColumn(name = "conflict_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id")
+    )
+    private List<Country> countries;
+
+    @OneToMany(
+            mappedBy = "conflict",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Faction> factions;
+
+    @OneToMany(
+            mappedBy = "conflict",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Event> events;
 
     // Constructors, Getters i Setters...
 
@@ -38,17 +63,17 @@ public class Conflict {
         this.customer = customer;
     }
 
-    public void setTitol(String titol) {
-        this.titol = titol;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDescripcio(String descripcio) {
-        this.descripcio = descripcio;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
-    public void setEstat(ConflictStatus estat) {
-        this.estat = estat;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     // Important: Cal sobreescriure equals() i hashCode()
@@ -60,19 +85,31 @@ public class Conflict {
         return id;
     }
 
-    public String getTitol() {
-        return titol;
+    public List<Country> getCountries() {
+        return countries;
     }
 
-    public String getDescripcio() {
-        return descripcio;
+    public List<Faction> getFactions() {
+        return factions;
     }
 
-    public LocalDateTime getDataObertura() {
-        return dataObertura;
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public ConflictStatus getEstat() {
-        return estat;
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

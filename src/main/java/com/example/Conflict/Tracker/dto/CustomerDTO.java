@@ -7,6 +7,6 @@ public record CustomerDTO(
         String firstName,
         String lastName,
         String email,
-        List<ConflictDTO> incidencies
+        List<ConflictDTO> conflicts
 ) {
 }

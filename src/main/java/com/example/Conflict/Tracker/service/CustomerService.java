@@ -73,37 +73,5 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    // --- Mètodes de conversió ---
-
-    private CustomerDTO convertToCustomerDTO(Customer customer) {
-
-        // 1. Converteix la llista d'Entitats a una llista de DTOs
-        List<ConflictDTO> incidenciaDTOs = customer.getIncidencies()
-                .stream()
-                .map(this::convertToIncidenciaDTO) // Crida el conversor "fill"
-                .toList(); // .toList() és més modern que .collect(Collectors.toList())
-
-        // 2. Crea el DTO "pare" usant el constructor del record
-        return new CustomerDTO(
-                customer.getId(),
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
-                incidenciaDTOs
-        );
-    }
-
-    private ConflictDTO convertToIncidenciaDTO(Conflict incidencia) {
-        // Crea el DTO "fill"
-        return new ConflictDTO(
-                incidencia.getId(),
-                incidencia.getTitol(),
-                incidencia.getDataObertura(),
-                incidencia.getEstat(),
-                incidencia.getDescripcio()
-        );
-    }
-
-
-
 }
+

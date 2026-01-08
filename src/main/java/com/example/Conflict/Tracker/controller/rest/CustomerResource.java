@@ -1,10 +1,8 @@
 package com.example.Conflict.Tracker.controller.rest;
 
 import com.example.Conflict.Tracker.dto.CustomerDTO;
-import com.example.Conflict.Tracker.model.Customer;
 import com.example.Conflict.Tracker.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,13 +44,5 @@ public class CustomerResource {
     public void deleteCustomer(@PathVariable("id") Long id) {
         service.deleteCustomer(id);
     }
-
-
-
-
-
-
-
-
 
 }
