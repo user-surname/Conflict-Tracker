@@ -1,6 +1,6 @@
 package com.example.Conflict.Tracker.model;
 
-public enum ConflictStatus {
+public enum Status {
     ACTIVE,
     FROZEN,
     ENDED

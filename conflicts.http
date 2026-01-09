@@ -1,0 +1,29 @@
+### GET
+GET http://localhost:8080/conflicts
+
+### GET by Id
+GET http://localhost:8080/conflicts/1
+
+
+### POST
+POST http://localhost:8080/conflicts
+Content-Type: application/json
+
+{
+  "name": "Conflicto 5",
+  "description": "Desctipcion",
+  "status": "ACTIVE"
+}
+
+### PUT
+PUT http://localhost:8080/conflicts/1
+Content-Type: application/json
+
+{
+  "name": "Conflicto 1",
+  "description": "Desctipcion 1.1",
+  "status": "ACTIVE"
+}
+
+### DELETE By Id
+DELETE http://localhost:8080/conflicts/5

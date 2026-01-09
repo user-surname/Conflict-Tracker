@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping(ConflictResource.CONFLICTS)
 public class ConflictResource {
 
-    public static final String CONFLICTS = "/Conflicts";
+    public static final String CONFLICTS = "/conflicts";
 
     @Autowired
     private ConflictService service;
@@ -33,8 +33,9 @@ public class ConflictResource {
     }
 
     @PutMapping("/{id}")
-    public ConflictDTO updateConflict(@RequestBody ConflictDTO conflictDTO) {
-        ConflictDTO dto = service.updateConflict(conflictDTO);
+    public ConflictDTO updateConflict(  @PathVariable("id") Long id,
+                                        @RequestBody ConflictDTO conflictDTO) {
+        ConflictDTO dto = service.updateConflict(id, conflictDTO);
         return dto;
     }
 

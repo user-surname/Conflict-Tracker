@@ -1,6 +1,7 @@
 package com.example.Conflict.Tracker;
 
 import com.example.Conflict.Tracker.model.Conflict;
+import com.example.Conflict.Tracker.model.Status;
 import com.example.Conflict.Tracker.repository.ConflictRepository;
 import com.example.Conflict.Tracker.service.ConflictService;
 import org.springframework.boot.SpringApplication;
@@ -21,10 +22,10 @@ public class ConflictTrackerApplication {
     public CommandLineRunner demo(ConflictService conflictService, ConflictRepository conflictRepository) {
         return (args) -> {
             // save a few conflicts
-            conflictRepository.save(new Conflict("Conflicto 1", "conflexco", "cocoflixtro"));
-            conflictRepository.save(new Conflict("Conflicto 2", "conflexco", "cocoflixtro"));
-            conflictRepository.save(new Conflict("Conflicto 3", "conflexco", "cocoflixtro"));
-            conflictRepository.save(new Conflict("Conflicto 4", "conflexco", "cocoflixtro"));
+            conflictRepository.save(new Conflict("Conflicto 1", "Descripcion 1", Status.ACTIVE));
+            conflictRepository.save(new Conflict("Conflicto 2", "Descripcion 2", Status.ACTIVE));
+            conflictRepository.save(new Conflict("Conflicto 3", "Descripcion 3", Status.FROZEN));
+            conflictRepository.save(new Conflict("Conflicto 4", "Descripcion 4", Status.ENDED));
 
 
         };
