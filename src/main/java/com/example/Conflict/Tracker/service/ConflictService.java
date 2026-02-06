@@ -52,14 +52,20 @@ public class ConflictService {
     }
 
     @Transactional
-    public ConflictDTO updateConflict(ConflictDTO conflictDTO) {
+    public ConflictDTO updateConflict(Long id,ConflictDTO conflictDTO) {
+        Conflict conflict = conflictRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Conflict not found with id " + id));
 
-        Conflict conflict = conflictMapper.toEntity(conflictDTO);
-        conflict = conflictRepository.save(conflict);
+        conflict.setName(conflictDTO.name());
+        conflict.setDescription(conflictDTO.description());
+        conflict.setStatus(conflictDTO.status());
 
-        return conflictMapper.toDTO(conflict);
+        Conflict saved = conflictRepository.save(conflict);
+
+        return conflictMapper.toDTO(saved);
     }
 
+    @Transactional
     public void deleteConflict(Long id) {
         Conflict conflict = conflictRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Conflict not found with id " + id)

@@ -20,7 +20,9 @@ public class Conflict {
 
     private LocalDateTime startDate = LocalDateTime.now();
 
-    private String status; // Ex: "OBERTA", "TANCADA", "EN_PROCÉS"
+    @Enumerated(EnumType.STRING)
+    private Status status; //     ACTIVE,FROZEN,ENDED
+
 
     // --- Aquí la relació inversa ---
     // Moltes incidències pertanyen a un client.
@@ -54,7 +56,14 @@ public class Conflict {
     public Conflict() {
     }
 
-    public Conflict(String name, String description, String status) {
+    public Conflict(Long id, String name, String description, Status status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Conflict(String name, String description, Status status) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -69,7 +78,7 @@ public class Conflict {
     }
 
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -106,7 +115,7 @@ public class Conflict {
         return startDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 }
