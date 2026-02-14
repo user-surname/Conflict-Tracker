@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "factiond")
+@Table(name = "factions")
 public class Faction {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     private String name;

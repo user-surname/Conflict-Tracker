@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ca" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Llista Thymeleaf</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+
+<div class="container">
+    <h1 class="text-primary">Conflicts (Renderitzat al Servidor)</h1>
+    <p>Aquesta taula s'ha generat al backend amb Java, no amb JavaScript!</p>
+
+    <table class="table table-hover bg-white shadow-sm rounded">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>StartDate</th>
+            <th>Status</th>
+            <th>Countries</th>
+            <th>Factions</th>
+            <th>Events</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="conflict : ${llistaConflicts}">
+
+            <td th:text="${conflict.id}">1</td>
+            <td th:text="${conflict.name}">Name</td>
+            <td th:text="${conflict.description}">Description</td>
+            <td th:text="${conflict.startDate}">Start Date</td>
+            <td th:text="${conflict.status}">Status</td>
+            <td>
+                <span class="badge bg-danger"
+                      th:if="${!conflict.countries.isEmpty()}"
+                      th:text="${conflict.countries.size()} + ' Countries'">
+                </span>
+                <span class="badge bg-success"
+                      th:if="${conflict.countries.isEmpty()}">
+                    No Countries
+                </span>
+            </td>
+            <td>
+                <span class="badge bg-danger"
+                      th:if="${!conflict.factions.isEmpty()}"
+                      th:text="${conflict.factions.size()} + ' Factions'">
+                </span>
+                <span class="badge bg-success"
+                      th:if="${conflict.factions.isEmpty()}">
+                    No Factions
+                </span>
+            </td>
+            <td>
+                <span class="badge bg-danger"
+                      th:if="${!conflict.events.isEmpty()}"
+                      th:text="${conflict.events.size()} + ' Events'">
+                </span>
+                <span class="badge bg-success"
+                      th:if="${conflict.events.isEmpty()}">
+                    No Events
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

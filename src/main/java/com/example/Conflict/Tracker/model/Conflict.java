@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "conflicts")
 public class Conflict {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -22,10 +22,6 @@ public class Conflict {
 
     @Enumerated(EnumType.STRING)
     private Status status; //     ACTIVE,FROZEN,ENDED
-
-
-    // --- Aquí la relació inversa ---
-    // Moltes incidències pertanyen a un client.
 
     @ManyToMany
     @JoinTable(
@@ -81,11 +77,6 @@ public class Conflict {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    // Important: Cal sobreescriure equals() i hashCode()
-    // si es treballa amb entitats fora de la transacció (DTOs, etc.),
-    // però per a un exemple inicial, ho podem ometre.
-
 
     public Long getId() {
         return id;
