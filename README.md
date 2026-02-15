@@ -7,7 +7,7 @@ Conflict Tracker és una aplicació per gestionar conflictes amb informació det
 - Java 17 o superior
 - Maven 3.x
 - PostgreSQL (o altra base de dades suportada)
-- IDE recomanat: IntelliJ IDEA o VS Code
+- IDE recomanat: IntelliJ IDEA
 
 ## Configuració
 
