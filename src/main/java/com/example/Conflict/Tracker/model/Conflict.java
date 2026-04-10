@@ -78,6 +78,22 @@ public class Conflict {
         this.status = status;
     }
 
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
+    }
+
+    public void setFactions(List<Faction> factions) {
+        this.factions = factions;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     public Long getId() {
         return id;
     }

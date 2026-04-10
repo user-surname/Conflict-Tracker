@@ -62,5 +62,9 @@ public class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setConflict(Conflict conflict) {
+        this.conflict = conflict;
+    }
 }
 
