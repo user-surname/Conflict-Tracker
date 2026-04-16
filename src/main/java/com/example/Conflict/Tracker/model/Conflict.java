@@ -15,7 +15,7 @@ public class Conflict {
     @Column(nullable = false)
     private String name;
 
-    @Lob // Per a textos llargs (es traduirà a CLOB o TEXT)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private LocalDateTime startDate = LocalDateTime.now();

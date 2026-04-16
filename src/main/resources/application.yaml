@@ -3,7 +3,7 @@ spring:
     name: Conflict-Tracker
 
   profiles:
-    active: dev
+    active: prod
 
   jpa:
     show-sql: true

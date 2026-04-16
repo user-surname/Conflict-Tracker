@@ -15,7 +15,8 @@ public class Event {
 
     private LocalDateTime eventDate = LocalDateTime.now();
     private String location;
-    @Lob
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
