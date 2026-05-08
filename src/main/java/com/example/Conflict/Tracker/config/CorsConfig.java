@@ -1,4 +1,4 @@
-package com.example.Conflict.Tracker.controller.config;
+package com.example.Conflict.Tracker.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Configuration;
